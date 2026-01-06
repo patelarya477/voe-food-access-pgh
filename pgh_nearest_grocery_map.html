@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ac1785a5bee38fd191bbc614d9f9af0d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_ac1785a5bee38fd191bbc614d9f9af0d" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ac1785a5bee38fd191bbc614d9f9af0d = L.map(
+                "map_ac1785a5bee38fd191bbc614d9f9af0d",
+                {
+                    center: [40.4402015, -79.9972345],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 14,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_badb1a34a99221b91ea50f1f4d6fb99a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_badb1a34a99221b91ea50f1f4d6fb99a.addTo(map_ac1785a5bee38fd191bbc614d9f9af0d);
+        
+    
+            var marker_b8cd8d54ef59d99810808849d33e0df4 = L.marker(
+                [40.4406, -79.9959],
+                {
+}
+            ).addTo(map_ac1785a5bee38fd191bbc614d9f9af0d);
+        
+    
+        var popup_91de05922d8ad8db9477235365932bae = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_449276114dd2cebb63920144843c1e3f = $(`<div id="html_449276114dd2cebb63920144843c1e3f" style="width: 100.0%; height: 100.0%;">Origin</div>`)[0];
+                popup_91de05922d8ad8db9477235365932bae.setContent(html_449276114dd2cebb63920144843c1e3f);
+            
+        
+
+        marker_b8cd8d54ef59d99810808849d33e0df4.bindPopup(popup_91de05922d8ad8db9477235365932bae)
+        ;
+
+        
+    
+    
+            marker_b8cd8d54ef59d99810808849d33e0df4.bindTooltip(
+                `<div>
+                     Origin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a58b71866d2d506d681ed66b0afa5ddd = L.marker(
+                [40.439803, -79.998569],
+                {
+}
+            ).addTo(map_ac1785a5bee38fd191bbc614d9f9af0d);
+        
+    
+        var popup_e6a6a63b5c202050f23bb8b2e4e06438 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_294ccf5a3e5453c6a0468bf7831e844f = $(`<div id="html_294ccf5a3e5453c6a0468bf7831e844f" style="width: 100.0%; height: 100.0%;"><b>Target Grocery</b><br>482 Smithfield Street, Pittsburgh<br>Straight-line: 0.15 miles<br>Driving distance: 0.5 km<br>Driving time: 3 mins</div>`)[0];
+                popup_e6a6a63b5c202050f23bb8b2e4e06438.setContent(html_294ccf5a3e5453c6a0468bf7831e844f);
+            
+        
+
+        marker_a58b71866d2d506d681ed66b0afa5ddd.bindPopup(popup_e6a6a63b5c202050f23bb8b2e4e06438)
+        ;
+
+        
+    
+    
+            marker_a58b71866d2d506d681ed66b0afa5ddd.bindTooltip(
+                `<div>
+                     Nearest grocery store
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_4a5e25a9162eaed81f5f914c5f9f0d82 = L.polyline(
+                [[40.4406, -79.9959], [40.439803, -79.998569]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_ac1785a5bee38fd191bbc614d9f9af0d);
+        
+</script>
+</html>
