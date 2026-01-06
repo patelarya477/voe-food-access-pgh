@@ -1,0 +1,12 @@
+branca==0.8.2
+certifi==2026.1.4
+charset-normalizer==3.4.4
+folium==0.20.0
+idna==3.11
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+numpy==2.4.0
+python-dotenv==1.2.1
+requests==2.32.5
+urllib3==2.6.2
+xyzservices==2025.11.0
