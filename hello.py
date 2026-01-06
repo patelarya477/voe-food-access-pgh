@@ -1,1 +1,8 @@
-print('Setup works ✅')
+"""
+hello.py
+
+Quick check that the Python environment is working.
+"""
+
+print("Setup works ✅")
+
