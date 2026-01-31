@@ -1,136 +1,229 @@
-"""
-make_map.py
-
-Generate an interactive HTML map showing:
-- origin point
-- nearest grocery store
-- a line between them
-- popup with straight-line + driving metrics
-
-Run:
-    python make_map.py
-Then open:
-    open pgh_nearest_grocery_map.html
-"""
-
-from __future__ import annotations
-
-import math
 import os
-from typing import Any, Dict, List, Optional, Tuple
-
 import folium
 import googlemaps
 from dotenv import load_dotenv
-
-ORIGIN: Tuple[float, float] = (40.4406, -79.9959)
-SEARCH_RADIUS_METERS: int = 5000
-PLACE_TYPE: str = "grocery_or_supermarket"
-TRAVEL_MODE: str = "driving"
-OUTPUT_HTML: str = "pgh_nearest_grocery_map.html"
+from folium.plugins import MarkerCluster
+from address_score import loadTractFeatures, scoreAddress
 
 
-def get_api_key() -> str:
+from nearest_store import loadPlaces, haversineMiles
+tractGeojsonPath = "data/processed/allegheny_food_access.geojson"
+scoreRadiusMiles = 1.0
+
+placesCsvPath = "data/processed/places.csv"
+outputHtmlPath = "userNearestPlaceMap.html"
+
+
+def getGoogleMapsClient():
     load_dotenv()
-    key = os.getenv("GOOGLE_MAPS_API_KEY")
-    if not key:
-        raise RuntimeError("Missing GOOGLE_MAPS_API_KEY. Check your .env file.")
-    return key
+    apiKey = os.getenv("GOOGLE_MAPS_API_KEY")
+    if not apiKey:
+        raise RuntimeError("Missing GOOGLE_MAPS_API_KEY in .env")
+    return googlemaps.Client(key=apiKey)
 
 
-def haversine_miles(a: Tuple[float, float], b: Tuple[float, float]) -> float:
-    lat1, lon1 = a
-    lat2, lon2 = b
-    r = 3958.7613
-
-    phi1, phi2 = math.radians(lat1), math.radians(lat2)
-    dphi = math.radians(lat2 - lat1)
-    dlambda = math.radians(lon2 - lon1)
-
-    h = (math.sin(dphi / 2) ** 2) + math.cos(phi1) * math.cos(phi2) * (math.sin(dlambda / 2) ** 2)
-    return 2 * r * math.atan2(math.sqrt(h), math.sqrt(1 - h))
+def geocodeAddress(gmapsClient, address):
+    results = gmapsClient.geocode(address)
+    if not results:
+        raise RuntimeError("Geocoding failed. Try a more specific address.")
+    location = results[0]["geometry"]["location"]
+    return float(location["lat"]), float(location["lng"])
 
 
-def fetch_places(gmaps: googlemaps.Client) -> List[Dict[str, Any]]:
-    resp = gmaps.places_nearby(location=ORIGIN, radius=SEARCH_RADIUS_METERS, type=PLACE_TYPE)
-    return resp.get("results", [])
+def filterPlaces(places, mode):
+    # mode: "restaurant" | "grocery" | "both"
+    if mode == "both":
+        return places
+    return [p for p in places if p.get("category") == mode]
 
 
-def pick_nearest_place(places: List[Dict[str, Any]]) -> Dict[str, Any]:
-    best: Optional[Dict[str, Any]] = None
-    best_dist = float("inf")
+def findNearestN(userLatLng, places, n):
+    scored = []
+    for place in places:
+        placeLatLng = (float(place["lat"]), float(place["lng"]))
+        d = haversineMiles(userLatLng, placeLatLng)
+        scored.append((d, place))
 
-    for p in places:
-        loc = p.get("geometry", {}).get("location", {})
-        lat = loc.get("lat")
-        lng = loc.get("lng")
-        if lat is None or lng is None:
-            continue
+    scored.sort(key=lambda x: x[0])
 
-        d = haversine_miles(ORIGIN, (float(lat), float(lng)))
-        if d < best_dist:
-            best = p
-            best_dist = d
+    nearest = []
+    for d, place in scored[:n]:
+        copyPlace = dict(place)
+        copyPlace["straightMiles"] = d
+        nearest.append(copyPlace)
 
-    if best is None:
-        raise RuntimeError("No valid places found (missing coordinates).")
-
-    best["_straight_line_miles"] = best_dist
-    return best
+    return nearest
 
 
-def driving_metrics(
-    gmaps: googlemaps.Client, dest: Tuple[float, float]
-) -> Tuple[Optional[str], Optional[str]]:
-    dm = gmaps.distance_matrix(origins=[ORIGIN], destinations=[dest], mode=TRAVEL_MODE)
-    element = dm.get("rows", [{}])[0].get("elements", [{}])[0]
-    if element.get("status") != "OK":
-        return None, None
-    return element["distance"]["text"], element["duration"]["text"]
+def buildMap(userLatLng, restaurants, groceries, nearestList, scoreInfo):
+    myMap = folium.Map(location=userLatLng, zoom_start=13)
 
-
-def main() -> None:
-    gmaps = googlemaps.Client(key=get_api_key())
-
-    places = fetch_places(gmaps)
-    if not places:
-        raise RuntimeError("No grocery stores found. Try increasing SEARCH_RADIUS_METERS.")
-
-    nearest = pick_nearest_place(places)
-    name = nearest.get("name", "Nearest grocery store")
-    addr = nearest.get("vicinity", "Unknown address")
-    loc = nearest.get("geometry", {}).get("location", {})
-    dest = (float(loc["lat"]), float(loc["lng"]))
-    straight_line = float(nearest["_straight_line_miles"])
-
-    dist_text, time_text = driving_metrics(gmaps, dest)
-
-    # Center map roughly between origin and destination for a nicer view.
-    center = ((ORIGIN[0] + dest[0]) / 2, (ORIGIN[1] + dest[1]) / 2)
-    m = folium.Map(location=center, zoom_start=14)
-
-    folium.Marker(location=ORIGIN, tooltip="Origin", popup="Origin").add_to(m)
-
-    popup_lines = [
-        f"<b>{name}</b>",
-        addr,
-        f"Straight-line: {straight_line:.2f} miles",
-    ]
-    if dist_text and time_text:
-        popup_lines += [f"Driving distance: {dist_text}", f"Driving time: {time_text}"]
-
+    # User marker
     folium.Marker(
-        location=dest,
-        tooltip="Nearest grocery store",
-        popup="<br>".join(popup_lines),
-    ).add_to(m)
+        location=userLatLng,
+        popup="Your location",
+        tooltip="Your location",
+        icon=folium.Icon(icon="home"),
+    ).add_to(myMap)
 
-    folium.PolyLine(locations=[ORIGIN, dest], weight=5, opacity=0.8).add_to(m)
+    # Draw the scoring radius circle
+    folium.Circle(
+        location=userLatLng,
+        radius=scoreInfo["summary"]["radiusMiles"] * 1609.34,
+        weight=2,
+        fill=False,
+        opacity=0.6,
+    ).add_to(myMap)
 
-    m.save(OUTPUT_HTML)
-    print(f"Saved map to: {OUTPUT_HTML}")
+    # Add an on-map summary box
+    s = scoreInfo["summary"]
+    b = scoreInfo["breakdown"]
+
+    summaryHtml = f"""
+    <div style="
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        background: white;
+        padding: 10px 14px;
+        border: 2px solid #444;
+        border-radius: 10px;
+        font-size: 14px;">
+    <b>Food Access Vulnerability (within {s['radiusMiles']} mi)</b><br>
+    <b>Score:</b> {scoreInfo['score1to10']}/10<br>
+    Groceries: {s['groceryCount']}<br>
+    Restaurants: {s['restaurantCount']}<br>
+    Fast food (chain proxy): {s['fastFoodCount']} ({int(round(100*s['fastFoodShare']))}%)<br>
+    LILA tract: {b['tractLila']}
+    </div>
+    """
+    myMap.get_root().html.add_child(folium.Element(summaryHtml))
+
+
+    # Separate layer groups (toggles)
+    restaurantLayer = folium.FeatureGroup(name="Restaurants").add_to(myMap)
+    groceryLayer = folium.FeatureGroup(name="Grocery stores").add_to(myMap)
+
+    restaurantCluster = MarkerCluster().add_to(restaurantLayer)
+    groceryCluster = MarkerCluster().add_to(groceryLayer)
+
+    # Add restaurant points (blue)
+    for place in restaurants:
+        placeLatLng = (float(place["lat"]), float(place["lng"]))
+        popupText = f"{place.get('name','')}<br>{place.get('address','')}"
+        folium.CircleMarker(
+            location=placeLatLng,
+            radius=4,
+            popup=popupText,
+            tooltip=place.get("name", ""),
+            color="blue",
+            fill=True,
+            fill_color="blue",
+            fill_opacity=0.7,
+        ).add_to(restaurantCluster)
+
+    # Add grocery points (green)
+    for place in groceries:
+        placeLatLng = (float(place["lat"]), float(place["lng"]))
+        popupText = f"{place.get('name','')}<br>{place.get('address','')}"
+        folium.CircleMarker(
+            location=placeLatLng,
+            radius=4,
+            popup=popupText,
+            tooltip=place.get("name", ""),
+            color="green",
+            fill=True,
+            fill_color="green",
+            fill_opacity=0.7,
+        ).add_to(groceryCluster)
+
+    # Highlight nearest (red star) and draw lines to top N
+    for i, place in enumerate(nearestList):
+        placeLatLng = (float(place["lat"]), float(place["lng"]))
+        label = "Nearest" if i == 0 else f"#{i+1} nearest"
+
+        popupText = (
+            f"<b>{label}</b><br>"
+            f"{place.get('name','')}<br>"
+            f"{place.get('category','')}<br>"
+            f"{place.get('address','')}<br>"
+            f"Straight-line distance: {place['straightMiles']:.2f} miles"
+        )
+
+        folium.Marker(
+            location=placeLatLng,
+            popup=popupText,
+            tooltip=label,
+            icon=folium.Icon(color="red", icon="star"),
+        ).add_to(myMap)
+
+        folium.PolyLine(locations=[userLatLng, placeLatLng], weight=2).add_to(myMap)
+
+    # Legend (simple HTML overlay)
+    legendHtml = """
+    <div style="
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        z-index: 9999;
+        background: white;
+        padding: 10px;
+        border: 2px solid #444;
+        border-radius: 8px;
+        font-size: 14px;">
+      <b>Legend</b><br>
+      <span style="color:blue;">●</span> Restaurant<br>
+      <span style="color:green;">●</span> Grocery store<br>
+      <span style="color:red;">★</span> Nearest options
+    </div>
+    """
+    myMap.get_root().html.add_child(folium.Element(legendHtml))
+
+    folium.LayerControl(collapsed=True).add_to(myMap)
+    return myMap
+
+
+def main():
+    if not os.path.exists(placesCsvPath):
+        raise RuntimeError("places.csv not found. Run python3 build_places.py first.")
+
+    userAddress = input("Enter an address in Pittsburgh: ").strip()
+
+    print("\nChoose what you want to search:")
+    print("1) Restaurants")
+    print("2) Grocery stores")
+    print("3) Both")
+    choice = input("Enter 1/2/3: ").strip()
+
+    if choice == "1":
+        mode = "restaurant"
+    elif choice == "2":
+        mode = "grocery"
+    else:
+        mode = "both"
+
+    gmapsClient = getGoogleMapsClient()
+    userLatLng = geocodeAddress(gmapsClient, userAddress)
+
+    places = loadPlaces(placesCsvPath)
+    tractFeatures = loadTractFeatures(tractGeojsonPath)
+    scoreInfo = scoreAddress(userLatLng, places, tractFeatures, scoreRadiusMiles)
+
+
+    restaurants = [p for p in places if p.get("category") == "restaurant"]
+    groceries = [p for p in places if p.get("category") == "grocery"]
+
+    filtered = filterPlaces(places, mode)
+    nearestList = findNearestN(userLatLng, filtered, 5)
+
+    myMap = buildMap(userLatLng, restaurants, groceries, nearestList, scoreInfo)
+    myMap.save(outputHtmlPath)
+
+    print(f"\nSaved map to: {outputHtmlPath}")
+    print(f"Top result: {nearestList[0].get('name','')} ({nearestList[0]['straightMiles']:.2f} mi)")
 
 
 if __name__ == "__main__":
     main()
-

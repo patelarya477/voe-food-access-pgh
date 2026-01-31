@@ -1,0 +1,121 @@
+placeId,name,address,lat,lng,types,category
+ChIJS1VVVRDyNIgRZH6zaKD986M,Market District Supermarket,"5550 Centre Ave, Pittsburgh, PA 15232, United States",40.4565029,-79.9346192,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJQRsgg4jxNIgRzhBN6AHbUgk,Frenchi's Deli & Market,"449 Atwood St, Pittsburgh, PA 15213, United States",40.4371953,-79.95258489999999,"convenience_store,point_of_interest,food,store,establishment",grocery
+ChIJY5prgW_xNIgRF0-wHrBWf9g,Giant Eagle Supermarket,"2021 Wharton St, Pittsburgh, PA 15203, United States",40.4310117,-79.97684269999999,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ2SjnaobxNIgR6UjCDY7hZjQ,A&K convenience store,"3459 Ward St, Pittsburgh, PA 15213, United States",40.4363829,-79.9542882,"convenience_store,point_of_interest,food,store,establishment",grocery
+ChIJuzJXK3fzNIgRRGhy1I7o2eI,Whole Foods Market,"5700 Penn Ave, Pittsburgh, PA 15206, United States",40.4625517,-79.9288163,"grocery_or_supermarket,liquor_store,supermarket,point_of_interest,food,store,health,establishment",grocery
+ChIJq3m-fLjtNIgRbE3wTPpb0AQ,Betts Market,"819 Brushton Ave, Pittsburgh, PA 15208, United States",40.45527149999999,-79.8883111,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ1zoyg4rtNIgRSxPRbL-pIKM,Trader Joe's,"6343 Penn Ave, Pittsburgh, PA 15206, United States",40.4592363,-79.9191827,"grocery_or_supermarket,supermarket,point_of_interest,food,store,health,establishment",grocery
+ChIJ6yXh0W3zNIgRo1u_nGobjHs,The A-Z Strip Market Inc,"57 18th St, Pittsburgh, PA 15222, United States",40.45066629999999,-79.98517269999999,"convenience_store,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJC_jcQYrxNIgRngOa8IWzcFc,Ravi’s (Everything You Need),"967 Liberty Ave, Pittsburgh, PA 15222, United States",40.4436769,-79.9956009,"convenience_store,cafe,grocery_or_supermarket,restaurant,point_of_interest,food,clothing_store,store,establishment",grocery
+ChIJQffli7XsNIgRTB_uHRHqzQk,Market District Supermarket,"Waterworks Plaza, 910 Freeport Rd, Pittsburgh, PA 15238, United States",40.4884011,-79.8938411,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJdauyj3bxNIgRgU4bRhg5s7Q,ALDI,"2628 E Carson St, Pittsburgh, PA 15203, United States",40.427552,-79.96782999999999,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJS0viUADzNIgRAihy9WIsnvM,Market District Supermarket,"6310 Penn Ave, Pittsburgh, PA 15206, United States",40.4592681,-79.9204218,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJqxxSBv_xNIgRHpqI1G1fn18,Giant Eagle Supermarket,"1901 Murray Ave, Pittsburgh, PA 15217, United States",40.4354495,-79.9226013,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJSW9ZdrnzNIgRj9BwbOPANKs,Bloomfield Community Market,"4401 Liberty Ave, Pittsburgh, PA 15224, United States",40.4641034,-79.9524886,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ5aPMIDzyNIgRO3Ge-gBPyVc,GetGo Café + Market,"4924 Baum Blvd, Pittsburgh, PA 15213, United States",40.454632,-79.9457596,"gas_station,convenience_store,cafe,point_of_interest,food,store,establishment",grocery
+ChIJ1SFXkDryNIgRHIYYeKHReEI,Sultan Bey,"4601 Centre Ave, Pittsburgh, PA 15213, United States",40.4520674,-79.9519992,"grocery_or_supermarket,meal_takeaway,restaurant,point_of_interest,food,store,establishment",grocery
+ChIJGxMRWzrzNIgRhjjnKCh_fUY,Forbes Street Market,"University of Pittsburgh, Bruce Hall, 3955 Forbes Ave, Pittsburgh, PA 15213, United States",40.4429165,-79.9550944,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJGU03RBPyNIgRsceo17xVpJc,ALDI,"5631 Baum Blvd, Pittsburgh, PA 15206, United States",40.4582752,-79.934899,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ5RiVf-LzNIgRAPmWlxHiLVU,Oak Hill Market,"504 Oak Hill Dr, Pittsburgh, PA 15213, United States",40.44328489999999,-79.96972749999999,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ_TZ3jjryNIgRtqpEUTSzkZs,Bombay Food Market,"4605 Centre Ave #1503, Pittsburgh, PA 15213, United States",40.4520774,-79.9516884,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJqXKGXcLtNIgR1463ucRHX8I,East End Food Co-op,"7516 Meade St, Pittsburgh, PA 15208, United States",40.448231,-79.895472,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJxwo0Xy_zNIgR-GegCQQ9ZcU,Scotty's Market,"5000 Forbes Ave, Pittsburgh, PA 15213, United States",40.4441277,-79.9389034,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJhXPKO7rxNIgR4RL5D_bHgoM,Vendor Bender,"2301 Murray Ave, Pittsburgh, PA 15217, United States",40.4316062,-79.92313639999999,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJe96CpPvzNIgR1XLc9bffY6M,Giant Eagle Supermarket,"318-320 Cedar Ave, Pittsburgh, PA 15212, United States",40.4514915,-79.9999733,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJrbPsYIbxNIgRlkq_8p_PocA,Groceria Merante,"3454 Bates St, Pittsburgh, PA 15213, United States",40.4365618,-79.9554003,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJlR8bgCPyNIgR3SKlTK01Cgo,Seoul Mart,"4701 Fifth Ave, Pittsburgh, PA 15213, United States",40.44718110000001,-79.94714599999999,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJVRGfB-PzNIgRgl3BVPkhnXY,7-Eleven,"1 Bigelow Sq, Pittsburgh, PA 15219, United States",40.4408471,-79.9940196,"convenience_store,liquor_store,cafe,restaurant,point_of_interest,food,store,establishment",grocery
+ChIJRe1uJ2ryNIgRBggOzYdROvs,ALDI,"5200 Penn Ave, Pittsburgh, PA 15224, United States",40.464522,-79.939418,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ05Zle6vzNIgR5d6-XIDBWbE,The PA Market,"108 19th St, Pittsburgh, PA 15222, United States",40.4508832,-79.9849885,"restaurant,bar,cafe,point_of_interest,food,store,establishment",grocery
+ChIJfbwbwhbzNIgRTx0w1Qdw7dU,SHOP 'n SAVE,"1620 Babcock Blvd, Millvale, PA 15209, United States",40.499107,-79.9791561,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ086LHVHxNIgRAYIT8K3B6NA,Smithfield News,"115 Smithfield St, Pittsburgh, PA 15222, United States",40.4377271,-80.00045840000001,"convenience_store,point_of_interest,food,store,establishment",grocery
+ChIJMWsnJADyNIgRw4CWZZRWuTY,Panda Supermarket,"5816-5818 Forbes Ave, Pittsburgh, PA 15217, United States",40.4379288,-79.9222397,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJRQ2QuzvyNIgR0vzCkK6_d6I,Dollar General,"4725 Centre Ave, Pittsburgh, PA 15213, United States",40.4533485,-79.94917769999999,"convenience_store,drugstore,grocery_or_supermarket,point_of_interest,food,store,health,establishment",grocery
+ChIJTYKYWUvxNIgRgTBQ97F4VQY,Mt Washington Shop 'n Save,"125 Virginia Ave, Pittsburgh, PA 15211, United States",40.4296598,-80.00793949999999,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJs5BaEubxNIgRmo3qr4wm8LM,Giant Eagle Supermarket,"4250 Murray Ave, Pittsburgh, PA 15217, United States",40.4223553,-79.9293938,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJP1gKhd3zNIgRDvDSrU2GptQ,Robert Wholey & Co. Inc.,"1711 Penn Ave, Pittsburgh, PA 15222, United States",40.4498864,-79.98595929999999,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ-V-AslfxNIgRotgP4uLUUtk,7-Eleven,"643 Liberty Ave, Pittsburgh, PA 15222, United States",40.4425938,-80.0002042,"convenience_store,liquor_store,cafe,restaurant,point_of_interest,food,store,establishment",grocery
+ChIJgX5HVMjzNIgRbOZX3IGiepE,Many More Marketplace,"2767 Liberty Ave, Pittsburgh, PA 15222, United States",40.4560012,-79.975833,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJF4HZydnzNIgR8ELgxPP4VOY,Center Hill Market,"2168 Centre Ave, Pittsburgh, PA 15219, United States",40.4452184,-79.9765941,"convenience_store,point_of_interest,food,store,establishment",grocery
+ChIJr2zAWVXzNIgRfUXEuOwvNoE,Harvie,"28 McCandless Ave, Pittsburgh, PA 15201, United States",40.4829564,-79.9550012,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJw6UeJELxNIgRWQ_pklHs2ZI,bp,"1006 E Carson St, Pittsburgh, PA 15203, United States",40.42852999999999,-79.988255,"gas_station,supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJH1lbamnxNIgR3tXJWeYo_YU,Carson News & Lottery,"1404 E Carson St, Pittsburgh, PA 15203, United States",40.4286979,-79.98387129999999,"convenience_store,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJh5-cqkfyNIgR0Oikxdv6q_g,Linea Verde Green Market,"4619 Liberty Ave, Pittsburgh, PA 15224, United States",40.462428,-79.9502103,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJbYyVTMPzNIgR5H5QfxE85Hs,WFH Oriental Market,"2306 Penn Ave, Pittsburgh, PA 15222, United States",40.4529415,-79.9811546,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJNdRSlcjzNIgRKztXRZ8R3os,Salem Market & Grill,"2923 Penn Ave, Pittsburgh, PA 15201, United States",40.4585382,-79.9737353,"grocery_or_supermarket,restaurant,point_of_interest,food,store,establishment",grocery
+ChIJuVURit3zNIgRpunVsdpgoOE,Lotus Food Company,"1649 Penn Ave, Pittsburgh, PA 15222, United States",40.4496903,-79.9862945,"supermarket,grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJx9iSpQzyNIgR_SApLGX0mx0,R Market,"256 S Highland Ave, Pittsburgh, PA 15206, United States",40.4572853,-79.925302,"grocery_or_supermarket,convenience_store,point_of_interest,food,store,establishment",grocery
+ChIJ6Q0m4tzzNIgR6_rNycDo-8w,Pennsylvania Macaroni Co.,"2010-2012 Penn Ave, Pittsburgh, PA 15222, United States",40.4512891,-79.9835032,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJoyiZ6wbzNIgR9MbDHsdgvJs,Murray's Market,"1700 Murray Ave, Pittsburgh, PA 15217, United States",40.4378025,-79.9231956,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJFdeQic_zNIgRFCpBAK7d__k,Bloomfield Groceria,"237 Cedarville St, Pittsburgh, PA 15224, United States",40.4618803,-79.9485296,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJ0cXvQA3yNIgRxeZU65tOynE,Tokyo Japanese Food Store,"5855 Ellsworth Ave, Pittsburgh, PA 15232, United States",40.4575615,-79.9292598,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJt7vPU3TyNIgRYMxXzut9iDA,Target,"6231 Penn Ave, Pittsburgh, PA 15206, United States",40.4609075,-79.92120899999999,"department_store,electronics_store,furniture_store,home_goods_store,shoe_store,point_of_interest,clothing_store,store,establishment",grocery
+ChIJs4oUOoPtNIgRFHeCCZ_SEbY,Enson Market 东方超市,"7511 Thomas Blvd, Pittsburgh, PA 15208, United States",40.449754,-79.894736,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJUe4p4tzzNIgRcr1CuO6DUJY,Stamoolis Brothers Co.,"2020 Penn Ave, Pittsburgh, PA 15222, United States",40.451303,-79.98328,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJF3TJFG_yNIgRCXny5nQwcZk,Garfield Market,"340 N Aiken Ave, Pittsburgh, PA 15206, United States",40.4675981,-79.9344685,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJTQ3q3SHyNIgRm1vAnIVxhZU,Entropy+,"University Center, 5032 Forbes Ave, Pittsburgh, PA 15213, United States",40.4429666,-79.9420756,"convenience_store,point_of_interest,food,store,establishment",grocery
+ChIJP0kgbNDtNIgRhOXNN2vB2t4,Save A Lot,"725 Ross Ave, Pittsburgh, PA 15221, United States",40.4427011,-79.8839661,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJvTL5iH_yNIgRUUq0ccQY6DA,Bryant Street Market,"5901 Bryant St, Pittsburgh, PA 15206, United States",40.4759057,-79.9194783,"grocery_or_supermarket,point_of_interest,food,store,establishment",grocery
+ChIJTZI2vU_xNIgRUptka-9QjUw,Squirrel Hill Market,"2130 Murray Ave, Pittsburgh, PA 15217, United States",40.4328811,-79.92317919999999,"grocery_or_supermarket,restaurant,point_of_interest,food,store,establishment",grocery
+ChIJ55g2E3DuNIgRy790OF-ioGM,Giant Eagle Supermarket,"1705 S Braddock Ave, Pittsburgh, PA 15218, United States",40.4257165,-79.8865572,"grocery_or_supermarket,supermarket,point_of_interest,food,store,establishment",grocery
+ChIJB8suhyjyNIgROsd4vPcFiDU,The Porch,"221 Schenley Dr, Pittsburgh, PA 15213, United States",40.4427046,-79.95306360000001,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJuanz3VnxNIgRevJ0mtJ3D9c,Ritual House,"524 William Penn Pl, Pittsburgh, PA 15219, United States",40.440327,-79.9971956,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJjx4DoCbyNIgRa4xgF5MtWX8,Union Grill Oakland,"413 S Craig St, Pittsburgh, PA 15213, United States",40.444802,-79.94851799999999,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJJZvnESrzNIgRpLiQd90HlPU,Lilith,"238 Spahr St, Pittsburgh, PA 15232, United States",40.4578548,-79.9275667,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJJz3ef1LzNIgR8aiq4fiCId0,FET-FISK restaurant + bar,"4786 Liberty Ave, Pittsburgh, PA 15224, United States",40.4605056,-79.9473453,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJXXutnFbxNIgR7UUU81s_VKg,The Yard,"100 Fifth Ave, Pittsburgh, PA 15222, United States",40.4412646,-80.0027879,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJZ0VnWfTxNIgRzwmWRLP4sy4,The Eagle - Pittsburgh,"737 Penn Ave, Pittsburgh, PA 15222, United States",40.4437105,-79.9997072,"restaurant,meal_takeaway,food,point_of_interest,establishment",restaurant
+ChIJU-E_KhvzNIgRfi53Eoj79i8,Fig & Ash,"514 E Ohio St, Pittsburgh, PA 15212, United States",40.4537583,-80.0001581,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJzwS4zTryNIgRGmSRESQtGHo,Butterjoint,"208 N Craig St, Pittsburgh, PA 15213, United States",40.4501664,-79.950738,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJK0Gg3U3xNIgR91MmvokkqIE,Grand Concourse,"100 W Station Square Dr, Pittsburgh, PA 15219, United States",40.4334169,-80.003885,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJWc78NOLzNIgRcQKCaa4pSCU,Eleven,"1150 Smallman St, Pittsburgh, PA 15222, United States",40.4460872,-79.99319419999999,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJPxm6vcfxNIgRojt2mErBxbY,Tupelo Honey Southern Kitchen & Bar,"111 W Station Square Dr, Pittsburgh, PA 15219, United States",40.43297,-80.0039219,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJHdQeTnzxNIgRMG7Df7vNwmQ,Nan Xiang Soup Dumplings - Pittsburgh,"2773 Sidney St, Pittsburgh, PA 15203, United States",40.4272412,-79.9648354,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJlQneC5XzNIgRVpcr91hBivM,El Jefe's Taqueria - Pittsburgh,"3807 Forbes Ave, Pittsburgh, PA 15213, United States",40.4418728,-79.9568444,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJCzqyxVbxNIgRkt_SjUXDTyM,Café Momentum Pittsburgh,"268 Forbes Ave, Pittsburgh, PA 15222, United States",40.440186,-80.001392,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJ4SrQ-rTzNIgRBCWal8EzERk,Morcilla,"3519 Butler St, Pittsburgh, PA 15201, United States",40.4645245,-79.9660841,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJ7eZZsdPxNIgRVbqH4afjZv0,Alta Via,"PPG Place, 2, #150, Pittsburgh, PA 15222, United States",40.4404114,-80.0030895,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJWdAveK_2NIgRLTc86K9aJpk,Altius,"1230 Grandview Ave, Pittsburgh, PA 15211, United States",40.4384823,-80.0192857,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJk8jCsFfxNIgRMmNkTMues7A,The Warren Bar & Burrow,"245 7th St, Pittsburgh, PA 15222, United States",40.4426117,-79.9998155,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJvwEwzVfxNIgROGhy_5YvzPQ,Proper Brick Oven & Tap Room,"139 7th St, Pittsburgh, PA 15222, United States",40.4435416,-80.0002753,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJUWs5GN3zNIgRPZqcckSz0q4,Kaya,"2000 Smallman St, Pittsburgh, PA 15222, United States",40.4516523,-79.9844724,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJGfCWEFfxNIgRKdud4avVJZk,The Capital Grille,"301 Fifth Ave, Pittsburgh, PA 15222, United States",40.440756,-80.000116,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJ94jpoOLzNIgRJYcVFw-XWSU,Sienna Mercato,"942 Penn Ave, Pittsburgh, PA 15222, United States",40.443966,-79.99641199999999,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJ1QL2R1bxNIgR3zR9Fz4lorg,Meat & Potatoes,"649 Penn Ave, Pittsburgh, PA 15222, United States",40.4431503,-80.0011895,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJLe2gNljxNIgRyIt5PgU3xtk,The Commoner,"620 William Penn Pl, Pittsburgh, PA 15219, United States",40.4415752,-79.996303,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJ2x9UxjDyNIgRAlU-QHejcTs,Zarra's Restaurant,"3887 Bigelow Blvd, Pittsburgh, PA 15213, United States",40.45473399999999,-79.9543154,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJnetrqnTyNIgR7bt3L49RUTM,Casbah,"229 S Highland Ave, Pittsburgh, PA 15206, United States",40.458153,-79.9249504,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJLRHyqyrzNIgRg1E9MSopuwM,The Hungry CowGirl Cocina,"451 Melwood Ave, Pittsburgh, PA 15213, United States",40.4552483,-79.9532385,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJv2lbVX3zNIgRtRjEd9vCPoM,The Mill Food Co,"451 Melwood Ave, Pittsburgh, PA 15213, United States",40.4552939,-79.9532357,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJHaLGRefzNIgRf_UaVEuRZtE,Gaucho Parrilla Argentina,"146 6th St, Pittsburgh, PA 15222, United States",40.4427824,-80.0025062,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJ4zrgoMTzNIgRYm7bLQClNKs,Layne's Chicken Fingers- Pittsburgh,"3621 Forbes Ave, Pittsburgh, PA 15213, United States",40.4411208,-79.9578147,"meal_takeaway,meal_delivery,restaurant,food,point_of_interest,establishment",restaurant
+ChIJR65OfE3xNIgRwwJ9GfSfzCw,The Factory South Shore,"300 W Station Square Dr, Pittsburgh, PA 15219, United States",40.4346103,-80.0064395,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJ1a5WTUbyNIgRjZqErFhIgMQ,Tessaro's American Bar & Hardwood Grill,"4601 Liberty Ave, Pittsburgh, PA 15224, United States",40.4627079,-79.9507292,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJw-xxVofxNIgRPoR9kR0qQaU,Piada Italian Street Food,"3600 Forbes Ave, Pittsburgh, PA 15213, United States",40.4405492,-79.9580649,"store,restaurant,food,point_of_interest,establishment",restaurant
+ChIJA8Cr32vxNIgRTtKdJVxfpH8,Dish Osteria Bar,"128 S 17th St, Pittsburgh, PA 15203, United States",40.4275173,-79.9822917,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJDX1xhyjzNIgRCKQBpBVyWfg,Cellars Speakeasy,"2400 Smallman St Suite 100, Pittsburgh, PA 15222, United States",40.4539905,-79.98107759999999,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJbZevISTyNIgRmAk5MgJN5NY,Ali Baba Restaurant,"404 S Craig St, Pittsburgh, PA 15213, United States",40.4450953,-79.9488983,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJR-ud98TzNIgREwnaG2ksz6k,DiAnoia's Eatery,"2549 Penn Ave, Pittsburgh, PA 15222, United States",40.4549226,-79.97877729999999,"cafe,bar,store,restaurant,food,point_of_interest,establishment",restaurant
+ChIJZU5v0vbtNIgRMii7ACbO6JI,Point Brugge Cafe,"401 Hastings St, Pittsburgh, PA 15206, United States",40.4500886,-79.91392309999999,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJJaPE5unzNIgRtejYOpsTUgg,BALVANERA,"1660 Smallman St, Pittsburgh, PA 15222, United States",40.4499853,-79.98688059999999,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJAQCw1FfxNIgR8gdJyIh-4fM,Social House 7,"123 7th St, Pittsburgh, PA 15222, United States",40.444072,-80.000344,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJTZlzAgDzNIgR8Z-LifC0NrQ,Grapow,"411 S Craig St, Pittsburgh, PA 15213, United States",40.4448787,-79.9484104,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJdVCquinyNIgR2oRCbBuyh3A,Hemingway's Cafe,"3911 Forbes Ave, Pittsburgh, PA 15213, United States",40.4422489,-79.95618879999999,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJofJwzFbxNIgRC57bGvzRYKE,The Rebel Room,"405 Wood St, Pittsburgh, PA 15222, United States",40.4395984,-80.0014058,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJ2yPqm_fyNIgRrX4_XAqLAjw,Pusadee's Garden,"5319 Butler St, Pittsburgh, PA 15201, United States",40.4825477,-79.9519725,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJ784vwP7zNIgRbVdQMYJd8MA,Spirits & Tales,"5130 Bigelow Blvd, Pittsburgh, PA 15213, United States",40.4449359,-79.9550611,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJMwNf-k3xNIgRKJcrlH1YVqQ,Forbes Tavern,"310 Forbes Ave, Pittsburgh, PA 15222, United States",40.4398419,-80.00043289999999,"restaurant,bar,food,point_of_interest,establishment",restaurant
+ChIJb_pzMADzNIgR3xqhu9z9SR0,CAVA,"3619 Forbes Ave, Pittsburgh, PA 15213, United States",40.4410252,-79.9579402,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJ-QhLYVbxNIgR7Hk4Ca0Qesc,täkō,"214 6th St, Pittsburgh, PA 15222, United States",40.4423048,-80.0021624,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJHf2pVZTxNIgR4QKTat1XtxI,The Colombian Spot,"University of Pittsburgh, 3533 Forbes Ave Floor 1, Pittsburgh, PA 15203, United States",40.4406022,-79.9585026,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJC5P7sxHyNIgR6IoKrVoD-QY,Pasha Mediterranean Restaurant,"808 Ivy St, Pittsburgh, PA 15232, United States",40.45131689999999,-79.93226,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJv-X66E3xNIgR4rFcM-iZBxQ,Melting Pot,"242 W Station Square Dr, Pittsburgh, PA 15219, United States",40.4342405,-80.0055715,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJoaEBy7LxNIgRW6AehuboyTg,gi-jin,"208 6th St, Pittsburgh, PA 15222, United States",40.4424546,-80.0021805,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJjVrbU-HxNIgRHH-_Qorimjc,Del Frisco's Double Eagle Steakhouse,"455 Fifth Ave, Pittsburgh, PA 15219, United States",40.4399601,-79.9969431,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJA8jyCVjxNIgRaTBDzIS-Fvg,Bakersfield Penn Ave,"940 Penn Ave, Pittsburgh, PA 15222, United States",40.4440518,-79.996629,"restaurant,meal_takeaway,bar,food,point_of_interest,establishment",restaurant
+ChIJIT1oZvXzNIgRvLM0Pa2Ddq4,Raising Cane's Chicken Fingers,"3610 Fifth Ave, Pittsburgh, PA 15213, United States",40.4414476,-79.9586794,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJ9Q1kJUTyNIgRuvW9f60WFmI,APTEKA,"4606 Penn Ave, Pittsburgh, PA 15224, United States",40.4657654,-79.9492976,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJw6RcwCnyNIgR6Ls6fE_x9wI,Primanti Bros. Restaurant and Bar,"3803 Forbes Ave, Pittsburgh, PA 15213, United States",40.44176789999999,-79.9569149,"bar,restaurant,food,point_of_interest,establishment",restaurant
+ChIJUQ8c81bxNIgRnioofxjN84M,fl.2,"510 Market St, Pittsburgh, PA 15222, United States",40.4413607,-80.0013851,"restaurant,food,point_of_interest,establishment",restaurant
+ChIJFdDEVBjzNIgRzH8p4nOhS7U,EGE Mediterranean,"190 N Craig St, Pittsburgh, PA 15213, United States",40.4495745,-79.9504668,"restaurant,food,point_of_interest,establishment",restaurant
