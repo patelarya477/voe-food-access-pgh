@@ -1,3 +1,20 @@
+# secrets
+.env
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# data (don’t commit raw datasets)
+data/raw/
+data/**/*.zip
+data/**/*.shp
+data/**/*.shx
+data/**/*.dbf
+data/**/*.prj
+data/**/*.cpg
+data/**/*.xlsx
 .env
 .venv/
 __pycache__/
