@@ -1,139 +1,196 @@
-# build_places_dot.py
-# ---------------------------------------------
-# Builds an Allegheny County "exhaustive-ish" places dataset
-# using Google Places Nearby Search + dot/grid method.
-#
-# Output:
-#   data/processed/places_all.csv
-#
-# Notes:
-# - Uses "type=" when available (supermarket, restaurant, etc.)
-# - Uses "keyword=" when Google doesn't have a clean type (food bank, farmers market)
-# - Deduplicates by placeId
-# ---------------------------------------------
-
-import os
-import time
+import argparse
 import math
-import pandas as pd
+import os
+import random
+import time
+from typing import Dict, List, Tuple
+
 import googlemaps
+import pandas as pd
 from dotenv import load_dotenv
 
-# ---- Configuration ----
-
 OUT_CSV = "data/processed/places_all.csv"
-
-# Allegheny County bounding box (rough, covers the county)
-BBOX = {
-    "west":  -80.35,
-    "east":  -79.65,
-    "south":  40.20,
-    "north":  40.65,
+DEFAULT_BBOX = {
+    "west": -80.35,
+    "east": -79.65,
+    "south": 40.20,
+    "north": 40.65,
 }
+DEFAULT_GRID_SPACING_KM = 2.0
+DEFAULT_SEARCH_RADIUS_M = 2000
+DEFAULT_SLEEP_BETWEEN_POINTS = 0.1
+DEFAULT_PAGE_TOKEN_SLEEP = 2.2
+DEFAULT_MAX_RETRIES = 4
+DEFAULT_RETRY_BASE_SLEEP = 1.5
 
-GRID_SPACING_KM = 2.0      # bigger spacing = fewer API calls, less dense coverage
-SEARCH_RADIUS_M = 2000     # larger radius = better coverage per point
-SLEEP_BETWEEN_POINTS = 0.1 # small pause to be kind to the API
-PAGE_TOKEN_SLEEP = 2.2     # token activation delay (required)
-
-
-# Categories:
-# - If "type" exists, Google can filter strongly.
-# - If only "keyword" exists, results depend on Google's relevance ranking.
+# If "type" exists, Google can filter strongly.
+# If only "keyword" exists, results depend on Google's relevance ranking.
 CATEGORIES = {
-    "grocery":        {"type": "supermarket"},
-    "convenience":    {"type": "convenience_store"},
-    "restaurant":     {"type": "restaurant"},
-    "fast_food":      {"type": "meal_takeaway"},   # catches a lot of fast food/takeout
-    "food_bank":      {"keyword": "food bank"},
+    "grocery": {"type": "supermarket"},
+    "convenience": {"type": "convenience_store"},
+    "restaurant": {"type": "restaurant"},
+    "fast_food": {"type": "meal_takeaway"},
+    "food_bank": {"keyword": "food bank"},
     "farmers_market": {"keyword": "farmers market"},
 }
 
 
-# ---- Environment Setup ----
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Build an Allegheny County places dataset using Google Places Nearby Search."
+    )
+    parser.add_argument("--out-csv", default=OUT_CSV, help="Output CSV file path.")
+    parser.add_argument(
+        "--grid-spacing-km",
+        type=float,
+        default=DEFAULT_GRID_SPACING_KM,
+        help="Grid spacing in km; larger values reduce API calls.",
+    )
+    parser.add_argument(
+        "--search-radius-m",
+        type=int,
+        default=DEFAULT_SEARCH_RADIUS_M,
+        help="Nearby search radius in meters.",
+    )
+    parser.add_argument(
+        "--sleep-between-points",
+        type=float,
+        default=DEFAULT_SLEEP_BETWEEN_POINTS,
+        help="Delay between grid points, in seconds.",
+    )
+    parser.add_argument(
+        "--page-token-sleep",
+        type=float,
+        default=DEFAULT_PAGE_TOKEN_SLEEP,
+        help="Delay before fetching paginated results, in seconds.",
+    )
+    parser.add_argument(
+        "--max-retries",
+        type=int,
+        default=DEFAULT_MAX_RETRIES,
+        help="Max retries for API calls before failing.",
+    )
+    parser.add_argument(
+        "--retry-base-sleep",
+        type=float,
+        default=DEFAULT_RETRY_BASE_SLEEP,
+        help="Base backoff delay in seconds for API retries.",
+    )
+    return parser
 
-load_dotenv()
-GMAPS_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
-if not GMAPS_KEY:
-    raise RuntimeError("Missing GOOGLE_MAPS_API_KEY in .env")
+def validate_args(args: argparse.Namespace) -> None:
+    if args.grid_spacing_km <= 0:
+        raise ValueError("--grid-spacing-km must be > 0")
+    if args.search_radius_m <= 0:
+        raise ValueError("--search-radius-m must be > 0")
+    if args.sleep_between_points < 0:
+        raise ValueError("--sleep-between-points must be >= 0")
+    if args.page_token_sleep <= 0:
+        raise ValueError("--page-token-sleep must be > 0")
+    if args.max_retries < 0:
+        raise ValueError("--max-retries must be >= 0")
+    if args.retry_base_sleep <= 0:
+        raise ValueError("--retry-base-sleep must be > 0")
 
-gmaps = googlemaps.Client(key=GMAPS_KEY)
 
-
-# ---- Helper Functions ----
-
-def kmToDegLat(km: float) -> float:
+def km_to_deg_lat(km: float) -> float:
     return km / 111.0
 
 
-def kmToDegLng(km: float, lat: float) -> float:
+def km_to_deg_lng(km: float, lat: float) -> float:
     return km / (111.0 * math.cos(math.radians(lat)))
 
 
-def generateGridPoints(bbox: dict, spacingKm: float) -> list:
-    """
-    Generate grid points across bounding box.
-    """
-    points = []
+def generate_grid_points(bbox: Dict[str, float], spacing_km: float) -> List[Tuple[float, float]]:
+    points: List[Tuple[float, float]] = []
     lat = bbox["south"]
 
     while lat <= bbox["north"]:
-        stepLng = kmToDegLng(spacingKm, lat)
+        step_lng = km_to_deg_lng(spacing_km, lat)
         lng = bbox["west"]
 
         while lng <= bbox["east"]:
             points.append((lat, lng))
-            lng += stepLng
+            lng += step_lng
 
-        lat += kmToDegLat(spacingKm)
+        lat += km_to_deg_lat(spacing_km)
 
     return points
 
 
-def fetchNearby(lat: float, lng: float, categoryDef: dict) -> list:
-    """
-    Fetch nearby places for one category at one grid point.
-    """
+def places_nearby_with_retry(
+    client: googlemaps.Client,
+    max_retries: int,
+    retry_base_sleep: float,
+    **kwargs,
+) -> dict:
+    for attempt in range(max_retries + 1):
+        try:
+            return client.places_nearby(**kwargs)
+        except Exception as exc:
+            if attempt >= max_retries:
+                raise RuntimeError(
+                    f"Google Places request failed after {max_retries + 1} attempts: {exc}"
+                ) from exc
+            backoff = retry_base_sleep * (2**attempt) + random.uniform(0, 0.4)
+            print(
+                f"Request failed ({exc}). Retrying in {backoff:.2f}s "
+                f"[attempt {attempt + 1}/{max_retries}]"
+            )
+            time.sleep(backoff)
+
+
+def fetch_nearby(
+    client: googlemaps.Client,
+    lat: float,
+    lng: float,
+    category_def: Dict[str, str],
+    radius_m: int,
+    page_token_sleep: float,
+    max_retries: int,
+    retry_base_sleep: float,
+) -> List[dict]:
     params = {
         "location": (lat, lng),
-        "radius": SEARCH_RADIUS_M,
+        "radius": radius_m,
     }
 
-    # Use type if available
-    if "type" in categoryDef:
-        params["type"] = categoryDef["type"]
+    if "type" in category_def:
+        params["type"] = category_def["type"]
+    if "keyword" in category_def:
+        params["keyword"] = category_def["keyword"]
 
-    # Use keyword if available
-    if "keyword" in categoryDef:
-        params["keyword"] = categoryDef["keyword"]
-
-    results = []
-    response = gmaps.places_nearby(**params)
+    results: List[dict] = []
+    response = places_nearby_with_retry(
+        client,
+        max_retries=max_retries,
+        retry_base_sleep=retry_base_sleep,
+        **params,
+    )
 
     while True:
         results.extend(response.get("results", []))
-
-        nextToken = response.get("next_page_token")
-        if not nextToken:
+        next_token = response.get("next_page_token")
+        if not next_token:
             break
 
-        time.sleep(PAGE_TOKEN_SLEEP)
-        response = gmaps.places_nearby(page_token=nextToken)
+        time.sleep(page_token_sleep)
+        response = places_nearby_with_retry(
+            client,
+            max_retries=max_retries,
+            retry_base_sleep=retry_base_sleep,
+            page_token=next_token,
+        )
 
     return results
 
 
-def normalizeTypes(typesList) -> str:
-    if not typesList:
-        return ""
-    return ",".join(typesList)
+def normalize_types(types_list: List[str]) -> str:
+    return ",".join(types_list) if types_list else ""
 
 
-def placeToRow(place: dict, category: str) -> dict:
-    """
-    Convert Google Place result to a CSV row.
-    """
+def place_to_row(place: dict, category: str) -> dict:
     loc = place["geometry"]["location"]
     return {
         "placeId": place.get("place_id"),
@@ -141,7 +198,7 @@ def placeToRow(place: dict, category: str) -> dict:
         "address": place.get("vicinity"),
         "lat": loc.get("lat"),
         "lng": loc.get("lng"),
-        "types": normalizeTypes(place.get("types", [])),
+        "types": normalize_types(place.get("types", [])),
         "category": category,
         "businessStatus": place.get("business_status"),
         "rating": place.get("rating"),
@@ -149,44 +206,69 @@ def placeToRow(place: dict, category: str) -> dict:
     }
 
 
-# ---- Main Pipeline ----
+def merge_category(existing_csv_categories: str, new_category: str) -> str:
+    existing = set(existing_csv_categories.split(",")) if existing_csv_categories else set()
+    existing.add(new_category)
+    return ",".join(sorted(cat for cat in existing if cat))
 
-def main():
-    os.makedirs("data/processed", exist_ok=True)
 
-    gridPoints = generateGridPoints(BBOX, GRID_SPACING_KM)
-    print(f"Generated {len(gridPoints)} grid points")
+def main() -> None:
+    args = build_arg_parser().parse_args()
+    validate_args(args)
+
+    load_dotenv()
+    gmaps_key = os.getenv("GOOGLE_MAPS_API_KEY")
+    if not gmaps_key:
+        raise RuntimeError("Missing GOOGLE_MAPS_API_KEY in .env")
+
+    client = googlemaps.Client(key=gmaps_key)
+    out_dir = os.path.dirname(args.out_csv) or "."
+    os.makedirs(out_dir, exist_ok=True)
+
+    grid_points = generate_grid_points(DEFAULT_BBOX, args.grid_spacing_km)
+    print(f"Generated {len(grid_points)} grid points")
     print(f"Categories: {list(CATEGORIES.keys())}")
 
-    # placeId -> row dict
-    # NOTE: a place can belong to multiple categories, so we store categories as a set-like string
-    seen = {}
+    seen: Dict[str, dict] = {}
+    total_place_hits = 0
 
-    for i, (lat, lng) in enumerate(gridPoints, start=1):
-        print(f"\n[{i}/{len(gridPoints)}] Grid point ({lat:.5f}, {lng:.5f})")
-
-        for category, categoryDef in CATEGORIES.items():
-            places = fetchNearby(lat, lng, categoryDef)
+    for i, (lat, lng) in enumerate(grid_points, start=1):
+        print(f"[{i}/{len(grid_points)}] Grid point ({lat:.5f}, {lng:.5f})")
+        for category, category_def in CATEGORIES.items():
+            places = fetch_nearby(
+                client=client,
+                lat=lat,
+                lng=lng,
+                category_def=category_def,
+                radius_m=args.search_radius_m,
+                page_token_sleep=args.page_token_sleep,
+                max_retries=args.max_retries,
+                retry_base_sleep=args.retry_base_sleep,
+            )
+            total_place_hits += len(places)
 
             for place in places:
-                placeId = place.get("place_id")
-                if not placeId:
+                place_id = place.get("place_id")
+                if not place_id:
                     continue
-
-                if placeId not in seen:
-                    seen[placeId] = placeToRow(place, category)
+                if place_id not in seen:
+                    seen[place_id] = place_to_row(place, category)
                 else:
-                    # Merge categories (so one place can be both restaurant + meal_takeaway, etc.)
-                    existing = seen[placeId]
-                    existingCats = set((existing.get("category") or "").split(",")) if existing.get("category") else set()
-                    existingCats.add(category)
-                    existing["category"] = ",".join(sorted([c for c in existingCats if c]))
+                    seen[place_id]["category"] = merge_category(
+                        seen[place_id].get("category", ""),
+                        category,
+                    )
 
-        time.sleep(SLEEP_BETWEEN_POINTS)
+        time.sleep(args.sleep_between_points)
 
-    df = pd.DataFrame(seen.values())
-    df.to_csv(OUT_CSV, index=False)
-    print(f"\nSaved {len(df)} unique places to {OUT_CSV}")
+    df = pd.DataFrame(seen.values()).sort_values(
+        by=["name", "placeId"],
+        na_position="last",
+    )
+    df.to_csv(args.out_csv, index=False)
+
+    print(f"Saved {len(df)} unique places to {args.out_csv}")
+    print(f"Raw place hits scanned (pre-dedup): {total_place_hits}")
 
 
 if __name__ == "__main__":
